@@ -30,7 +30,7 @@
   //region internal functions
   getHelpText = function() {
     log("getHelpText");
-    return "Usage\n    $ thingy-allmodules-sync <arg1>\n    \nOptions\n    optional:\n        arg1, --thingy-path <path/to/thingy>, -p <path/to/thingy> [default: ./ ]\n        path to the root of the thingy. Usually it is cwd. Use it if you call this script from somewhere else.\n\nTO NOTE:\n    The flags will overwrite the flagless argument.\nExamples\n    $ thingy-allmodules-sync \n    ...";
+    return "Usage\n    $ thingy-allmodules-sync <arg1> <arg2>\n\nOptions\n    optional:\n        arg1, --thingy-path <path/to/thingy>, -p <path/to/thingy> [default: ./ ]\n            path to the root of the thingy. Usually it is cwd. Use it if you call this script from somewhere else.\n        arg2, --style <importStyle>, -s <importStyle> [default: import]\n            determines if we use require or import can either be \"require\" or \"import\"\nTO NOTE:\n    The flags will overwrite the flagless argument.\nExamples\n    $ thingy-allmodules-sync \n    ...";
   };
 
   getOptions = function() {
@@ -40,25 +40,39 @@
         thingyPath: {
           type: "string",
           alias: "p"
+        },
+        style: {
+          type: "string",
+          alias: "s"
         }
       }
     };
   };
 
   extractMeowed = function(meowed) {
-    var thingyPath;
+    var style, thingyPath;
     log("extractMeowed");
     thingyPath = "";
+    style = "";
     if (meowed.input[0]) {
       thingyPath = meowed.input[0];
+    }
+    if (meowed.input[1]) {
+      style = meowed.input[1];
     }
     if (meowed.flags.thingyPath) {
       thingyPath = meowed.flags.thingyPath;
     }
+    if (meowed.flags.style) {
+      style = meowed.flags.style;
+    }
     if (!thingyPath) {
       thingyPath = ".";
     }
-    return {thingyPath};
+    if (!style) {
+      style = "import";
+    }
+    return {thingyPath, style};
   };
 
   throwErrorOnUsageFail = function(extract) {
@@ -66,12 +80,20 @@
     if (!extract.thingyPath) {
       throw "fatal error: no default thingyPath was not available as fallback!";
     }
+    if (!extract.style) {
+      throw "fatal error: no default style was not available as fallback!";
+    }
     if (!(typeof extract.thingyPath === "string")) {
       throw "Usage error: option thingyPath was provided in an unexpected way!";
     }
+    if (!(typeof extract.style === "string")) {
+      throw "Usage error: option style was provided in an unexpected way!";
+    }
+    if (extract.style !== "import" && extract.style !== "require") {
+      throw "Usage error: option style must be either import or require!";
+    }
   };
 
-  
   //endregion
 
   //region exposed functions

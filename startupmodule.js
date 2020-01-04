@@ -50,7 +50,7 @@
     try {
       e = cliArguments.extractArguments();
       // console.log(chalk.yellow("caught arguments are: " + args._))
-      done = (await syncProcess.execute(e.thingyPath));
+      done = (await syncProcess.execute(e.thingyPath, e.style));
       if (done) {
         return successLog('All done!');
       }

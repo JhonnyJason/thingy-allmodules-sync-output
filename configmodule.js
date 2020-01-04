@@ -18,6 +18,10 @@
     log("configmodule.initialize");
   };
 
+  configmodule.outputCoffeeName = "allmodules.coffee";
+
+  configmodule.outputStylusName = "allstyles.styl";
+
   module.exports = configmodule;
 
 }).call(this);

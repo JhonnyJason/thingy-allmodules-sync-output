@@ -34,15 +34,14 @@
 
   
   //region internal functions
-  isModule = function(module) {
-    switch (module) {
-      case "allmodules":
-        return false;
-      case "index":
-        return false;
-      default:
-        return true;
+  isModule = function(dirname) {
+    if (!dirname) {
+      return false;
     }
+    if (dirname.endsWith("module")) {
+      return true;
+    }
+    return false;
   };
 
   isCoffeeModule = async function(dir) {
@@ -128,8 +127,6 @@
       }
       return results;
     })();
-    // log "modules.coffee:\n" + JSON.stringify(modules.coffee, null, 4)
-    // log "modules.style:\n" + JSON.stringify(modules.style, null, 4)
     return modules;
   };
 
