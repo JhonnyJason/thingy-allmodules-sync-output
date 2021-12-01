@@ -43,13 +43,13 @@
   //endregion
 
   //region exposed functions
-  syncprocessmodule.execute = async function(path, style) {
+  syncprocessmodule.execute = async function(path) {
     var modules;
     log("syncprocessmodule.execute");
     await pathHandler.checkPaths(path);
     modules = (await moduleSearch.searchModules());
     log("found modules\n" + JSON.stringify(modules, null, 4));
-    await allmodulesgen.generate(modules, style);
+    await allmodulesgen.generate(modules);
     return true;
   };
 
