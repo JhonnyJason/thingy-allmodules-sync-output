@@ -5,7 +5,7 @@ For my current development process I find it handy to have a `allmodules.coffee`
 My current developtment style is to develop on my things as [thingies](https://hackmd.io/CWQerPTRR0CrRd-gpKKd-Q).
 
 This way I could reach all of the thingymodules at one point and automate away the task to add the modules there whenever modules added or removed.
-This is the automation tool for creating these files. Also it will assist to have them available in `sources/source/debugmodule`.
+This is the automation tool for creating these files.
 
 It will scan through all modules available in `sources/source/` of the specified thingy.
 For each module being a module (identified by having a name whichs ends with "module") we will add an import statement
