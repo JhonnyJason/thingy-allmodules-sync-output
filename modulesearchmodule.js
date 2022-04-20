@@ -18,14 +18,6 @@ import * as utl from "./utilmodule.js";
 //endregion
 
 //#############################################################################
-export var initialize = function() {
-  log("initialize");
-  pathHandler = allModules.pathhandlermodule;
-  utl = allModules.utilmodule;
-};
-
-
-//#############################################################################
 //region internal functions
 isModule = function(dirname) {
   if (!dirname) {
@@ -72,7 +64,7 @@ isStyleModule = async function(dir) {
 export var searchModules = async function() {
   var coffeeCheckPromises, coffeeResults, dir, dirs, modules, result, styleCheckPromises, styleResults;
   log("searchModules");
-  dirs = (await fs.readdir(pathHandler.sourcePath));
+  dirs = (await fs.readdir(pathHandler.getSourcePath()));
   // log "read dirs:\n" + JSON.stringify(dirs, null, 4)
   coffeeCheckPromises = (function() {
     var i, len, results;

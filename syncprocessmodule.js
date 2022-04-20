@@ -9,9 +9,9 @@ import {
 
 ({log, olog} = createLogFunctions("syncprocessmodule"));
 
-import * as c from 'chalk';
+import c from 'chalk';
 
-import * as pathHandler from "./pathhandermodule.js";
+import * as pathHandler from "./pathhandlermodule.js";
 
 import * as moduleSearch from "./modulesearchmodule.js";
 
@@ -28,6 +28,7 @@ successMessage = function(arg) {
 export var execute = async function(path) {
   var modules;
   log("execute");
+  olog({path});
   await pathHandler.checkPaths(path);
   modules = (await moduleSearch.searchModules());
   log("found modules\n" + JSON.stringify(modules, null, 4));

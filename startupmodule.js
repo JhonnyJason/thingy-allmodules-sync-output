@@ -9,11 +9,11 @@ import {
 
 ({log, olog} = createLogFunctions("startupmodule"));
 
-import * as c from 'chalk';
+import c from 'chalk';
 
-import * as syncProcess from "./syncprocessmodule";
+import * as syncProcess from "./syncprocessmodule.js";
 
-import * as cliArguments from "./cliargumentsmodule";
+import * as cliArguments from "./cliargumentsmodule.js";
 
 //endregion
 
@@ -35,7 +35,6 @@ export var cliStartup = async function() {
   log("cliStartup");
   try {
     e = cliArguments.extractArguments();
-    // console.log(chalk.yellow("caught arguments are: " + args._))
     done = (await syncProcess.execute(e.thingyPath));
     if (done) {
       return successLog('All done!');
